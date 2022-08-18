@@ -14,6 +14,12 @@ const productService = {
 
     return product;
   },
+
+  createProduct: async (name) => {
+    const product = await Products.createProduct(name);
+
+    return product;
+  },
 };
 
 module.exports = productService;
