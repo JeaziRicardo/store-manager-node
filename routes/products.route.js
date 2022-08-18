@@ -3,7 +3,9 @@ const productController = require('../controllers/product.controller');
 
 const prodRoute = Router();
 
-prodRoute.get('/', productController.getProducts);
 prodRoute.get('/:id', productController.productsById);
+
+prodRoute.get('/', productController.getProducts);
+prodRoute.post('/', productController.createProduct);
 
 module.exports = prodRoute;
