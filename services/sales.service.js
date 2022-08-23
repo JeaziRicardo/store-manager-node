@@ -12,6 +12,11 @@ const saleService = {
     );
     return { id: saleId, itemsSold };
   },
+
+  allSale: async () => {
+    const sales = await Sales.getAllSales();
+    return sales;
+  },
 };
 
 module.exports = saleService;
