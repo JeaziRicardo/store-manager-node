@@ -1,4 +1,6 @@
 const CustomError = require('../errors/customError');
+const Products = require('../models/Products');
+const schema = require('./schema');
 
 const validate = {
   productName: (req, _res, next) => {
@@ -14,6 +16,23 @@ const validate = {
     }
 
     return next();
+  },
+
+  schemaSale: async (itemsSold) => {
+    const { error } = schema.validate(itemsSold);
+    if (error) {
+      const [status, message] = error.message.split('|');
+      throw new CustomError(+status, message);
+    }
+    
+    await Promise.all(
+      itemsSold.map(async ({ productId }) => {
+        const product = await Products.productById(productId);
+        if (!product) {
+          throw new CustomError(404, 'Product not found');
+        }
+      }),
+    );
   },
 };
 
