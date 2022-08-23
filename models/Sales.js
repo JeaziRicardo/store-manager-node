@@ -34,14 +34,13 @@ const Sales = {
     const [sale] = await connection.execute(
       `
       SELECT 
-        sale_id AS saleId,
         product_id AS productId,
         quantity,
         date
       FROM StoreManager.sales_products
       JOIN StoreManager.sales ON sale_id = id
-      WHERE sale_id = ?
-      ORDER BY saleId, productId;
+      WHERE id = ?
+      ORDER BY productId;
     `,
       [saleId],
     );
