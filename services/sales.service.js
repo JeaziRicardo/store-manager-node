@@ -22,7 +22,7 @@ const saleService = {
   saleById: async (saleId) => {
     const sale = await Sales.getSaleById(saleId);
 
-    if (!sale) throw new CustomError(404, 'Sale not found');
+    if (sale.length === 0) throw new CustomError(404, 'Sale not found');
 
     return sale;
   },
