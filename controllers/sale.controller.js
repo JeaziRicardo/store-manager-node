@@ -12,6 +12,14 @@ const saleController = {
 
     res.status(200).json(sales);
   },
+
+  saleById: async (req, res) => {
+    const { id } = req.params;
+
+    const sale = await saleService.saleById(id);
+
+    res.status(200).json(sale);
+  },
 };
 
 module.exports = saleController;
