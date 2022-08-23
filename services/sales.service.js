@@ -1,3 +1,4 @@
+const CustomError = require('../errors/customError');
 const validate = require('../middlewares/validateMiddleware');
 const Sales = require('../models/Sales');
 
@@ -16,6 +17,14 @@ const saleService = {
   allSale: async () => {
     const sales = await Sales.getAllSales();
     return sales;
+  },
+
+  saleById: async (saleId) => {
+    const sale = await Sales.getSaleById(saleId);
+
+    if (!sale) throw new CustomError(404, 'Sale not found');
+    
+    return sale;
   },
 };
 
