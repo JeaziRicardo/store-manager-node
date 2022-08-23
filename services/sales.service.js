@@ -14,7 +14,7 @@ const saleService = {
     return { id: saleId, itemsSold };
   },
 
-  allSale: async () => {
+  allSales: async () => {
     const sales = await Sales.getAllSales();
     return sales;
   },
@@ -23,7 +23,7 @@ const saleService = {
     const sale = await Sales.getSaleById(saleId);
 
     if (!sale) throw new CustomError(404, 'Sale not found');
-    
+
     return sale;
   },
 };
