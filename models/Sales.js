@@ -15,7 +15,7 @@ const Sales = {
     );
   },
 
-    getAllSales: async () => {
+  getAllSales: async () => {
     const [sales] = await connection.execute(`
       SELECT 
         sale_id AS saleId,
@@ -28,6 +28,25 @@ const Sales = {
     `);
 
     return sales;
+  },
+
+  getSaleById: async (saleId) => {
+    const [sale] = await connection.execute(
+      `
+      SELECT 
+        sale_id AS saleId,
+        product_id AS productId,
+        quantity,
+        date
+      FROM StoreManager.sales_products
+      JOIN StoreManager.sales ON sale_id = id
+      WHERE sale_id = ?
+      ORDER BY saleId, productId;
+    `,
+      [saleId],
+    );
+
+    return sale;
   },
 };
 
