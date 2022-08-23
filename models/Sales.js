@@ -14,6 +14,21 @@ const Sales = {
       [saleId, productId, quantity],
     );
   },
+
+    getAllSales: async () => {
+    const [sales] = await connection.execute(`
+      SELECT 
+        sale_id AS saleId,
+        product_id AS productId,
+        quantity,
+        date
+      FROM StoreManager.sales_products
+      JOIN StoreManager.sales ON sale_id = id
+      ORDER BY saleId, productId;
+    `);
+
+    return sales;
+  },
 };
 
 module.exports = Sales;
