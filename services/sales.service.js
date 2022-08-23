@@ -3,7 +3,7 @@ const Sales = require('../models/Sales');
 
 const saleService = {
   dataSale: async (itemsSold) => {
-    validate.schemaSale(itemsSold);
+    await validate.schemaSale(itemsSold);
     const saleId = await Sales.insertSale();
     Promise.all(
       itemsSold.map(async ({ productId, quantity }) => {
