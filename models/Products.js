@@ -25,6 +25,19 @@ const Products = {
     );
     return { id: insertId, name };
   },
+
+  upProduct: async (name, productId) => {
+    const [{ affectedRows }] = await connection.execute(
+      `
+      UPDATE StoreManager.products
+      SET name = ?
+      WHERE id = ?;
+    `,
+      [name, productId],
+    );
+    
+    return { affectedRows };
+  },
 };
 
 module.exports = Products;
