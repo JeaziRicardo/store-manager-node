@@ -1,4 +1,5 @@
 const CustomError = require('../errors/customError');
+const validate = require('../middlewares/validateMiddleware');
 const Products = require('../models/Products');
 
 const productService = {
@@ -19,6 +20,14 @@ const productService = {
     const product = await Products.createProduct(name);
 
     return product;
+  },
+
+  upProduct: async (name, productId) => {
+    await validate.productById(productId);
+
+    await Products.upProduct(name, productId);
+
+    return { id: productId, name };
   },
 };
 
