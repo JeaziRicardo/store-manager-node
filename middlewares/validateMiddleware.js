@@ -18,6 +18,14 @@ const validate = {
     return next();
   },
 
+  productById: async (id) => {
+    const product = await Products.productById(id);
+
+    if (!product) {
+      throw new CustomError(404, 'Product not found');
+    }
+  },
+
   schemaSale: async (itemsSold) => {
     const { error } = schema.validate(itemsSold);
     if (error) {
